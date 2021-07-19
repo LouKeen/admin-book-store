@@ -2,6 +2,7 @@ package com.bcs.book.book
 
 import com.bcs.book.bookCategory.BookCategory
 import com.bcs.book.bookCategory.BookCategoryRepository
+import com.bcs.book.utils.buildResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -110,15 +111,5 @@ class BookService(@Autowired private val bookRepository: BookRepository, @Autowi
             HttpStatus.BAD_REQUEST to e
         }
         return buildResponse(status, "deleting", "books", result)
-    }
-
-    fun buildResponse(status: HttpStatus, action: String, item: String, result: Any) : ResponseEntity<Map<String, Any>> {
-        val stat = "status" to status
-        val mess = when(status) {
-            HttpStatus.CREATED, HttpStatus.OK -> "message" to "Successful in $action $item"
-            else -> "message" to "Failed in $action $item"
-        }
-        val res = "result" to result
-        return ResponseEntity.status(status).body(mapOf(stat, mess, res))
     }
 }
