@@ -70,17 +70,14 @@ class BookService(@Autowired private val bookRepository: BookRepository, @Autowi
                 bookRepository.save(bookById.copy(description = description))
             }
 
-            if (!categoryIds.isNullOrEmpty()) {
+            if (categoryIds != null) {
                 val categoryList = mutableListOf<BookCategory>()
 
                 categoryIds.forEach {
                     val bookCategory = bookCategoryRepository.findById(it).orElseThrow { throw IllegalArgumentException("Book Category with the id $it was not found.") }
                     categoryList.add(bookCategory)
                 }
-
-                if (categoryList.isNotEmpty()) {
-                    bookRepository.save(bookById.copy(categories = categoryList))
-                }
+                bookRepository.save(bookById.copy(categories = categoryList))
             }
             HttpStatus.OK to ""
         } catch (e: Exception) {

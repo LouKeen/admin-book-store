@@ -1,6 +1,5 @@
 package com.bcs.book.bookCategory
 
-import com.bcs.book.book.Book
 import org.hibernate.Hibernate
 import javax.persistence.*
 
@@ -20,7 +19,7 @@ data class BookCategory(
     )
     val id: Int?,
     val name: String,
-    val description: String,
+    val description: String
 ) {
     constructor(name: String, description: String): this(null, name, description)
 

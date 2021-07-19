@@ -22,7 +22,7 @@ data class Book(
     val name: String,
     val description: String,
 
-    @OneToMany(targetEntity = BookCategory::class, cascade = [CascadeType.ALL])
+    @ManyToMany(targetEntity = BookCategory::class, cascade = [CascadeType.REMOVE])
     val categories: List<BookCategory>?
 ){
     constructor(name: String, description: String) : this(null, name, description, emptyList())
