@@ -52,4 +52,8 @@ class BookCategoryService(@Autowired private val bookCategoryRepository: BookCat
             throw IllegalArgumentException("Book with id $bookCategoryId does not exist.")
         }
     }
+
+    fun deleteBookCategories(bookCategoryIds: List<Int>) {
+        bookCategoryIds.forEach { deleteBookCategory(it) }
+    }
 }

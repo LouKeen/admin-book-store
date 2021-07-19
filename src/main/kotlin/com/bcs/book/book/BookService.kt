@@ -56,4 +56,8 @@ class BookService(@Autowired private val bookRepository: BookRepository) {
         }
         bookRepository.deleteById(bookId)
     }
+
+    fun deleteBooks(bookIds: List<Int>) {
+        bookIds.forEach { deleteBook(it) }
+    }
 }

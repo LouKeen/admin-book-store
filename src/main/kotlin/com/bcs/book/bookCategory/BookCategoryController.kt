@@ -35,4 +35,9 @@ class BookCategoryController(@Autowired private val bookCategoryService: BookCat
     private fun deleteBookCategory(@PathVariable("bookCategoryId") bookCategoryId: Int) {
         bookCategoryService.deleteBookCategory(bookCategoryId)
     }
+
+    @DeleteMapping("/delete")
+    private fun deleteBookCategories(@RequestParam bookCategoryIds: List<Int>) {
+        bookCategoryService.deleteBookCategories(bookCategoryIds)
+    }
 }

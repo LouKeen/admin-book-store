@@ -35,4 +35,9 @@ class BookController(@Autowired private val bookService: BookService) {
     private fun deleteBook(@PathVariable("bookId") bookID: Int) {
         bookService.deleteBook(bookID)
     }
+
+    @DeleteMapping("/delete")
+    private fun deleteBooks(@RequestParam bookIds: List<Int>) {
+        bookService.deleteBooks(bookIds)
+    }
 }
