@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class BookCategoryConfig {
-
+    /* Code for populating the Book Table with initial data. For demo purposes only. */
     @Bean
     fun bookCategoryCommandLineRunner(bookCategoryRepository: BookCategoryRepository): CommandLineRunner {
         return CommandLineRunner {

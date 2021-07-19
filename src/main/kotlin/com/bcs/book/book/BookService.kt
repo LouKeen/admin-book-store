@@ -1,12 +1,14 @@
 package com.bcs.book.book
 
+import com.bcs.book.bookCategory.BookCategory
+import com.bcs.book.bookCategory.BookCategoryRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.transaction.Transactional
 
 @Service
-class BookService(@Autowired private val bookRepository: BookRepository) {
+class BookService(@Autowired private val bookRepository: BookRepository, @Autowired private val bookCategoryRepository: BookCategoryRepository) {
     fun getBooks(): List<Book> {
         return bookRepository.findAll()
     }
@@ -34,7 +36,7 @@ class BookService(@Autowired private val bookRepository: BookRepository) {
     }
 
     @Transactional
-    fun updateBook(bookId: Int, name: String?, description: String?) {
+    fun updateBook(bookId: Int, name: String?, description: String?, categoryIds: List<Int>?) {
         val bookById = bookRepository.findById(bookId).orElseThrow { throw IllegalArgumentException("Book with id $bookId does not exist.") }
 
         if (!name.isNullOrBlank() && !Objects.equals(bookById.name, name)) {
@@ -46,6 +48,19 @@ class BookService(@Autowired private val bookRepository: BookRepository) {
 
         if(!description.isNullOrBlank()) {
             bookRepository.save(bookById.copy(description = description))
+        }
+
+        if (!categoryIds.isNullOrEmpty()) {
+            val categoryList = mutableListOf<BookCategory>()
+
+            categoryIds.forEach {
+                val bookCategory = bookCategoryRepository.findById(it).orElseThrow { throw IllegalArgumentException("Book Category with the id $it was not found.") }
+                categoryList.add(bookCategory)
+            }
+
+            if (categoryList.isNotEmpty()) {
+                bookRepository.save(bookById.copy(categories = categoryList))
+            }
         }
     }
 

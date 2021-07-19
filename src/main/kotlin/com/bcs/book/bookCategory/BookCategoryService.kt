@@ -51,6 +51,7 @@ class BookCategoryService(@Autowired private val bookCategoryRepository: BookCat
         if (!bookCategoryById) {
             throw IllegalArgumentException("Book with id $bookCategoryId does not exist.")
         }
+        bookCategoryRepository.deleteById(bookCategoryId)
     }
 
     fun deleteBookCategories(bookCategoryIds: List<Int>) {
