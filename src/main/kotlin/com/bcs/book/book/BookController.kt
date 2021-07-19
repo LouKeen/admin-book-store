@@ -18,8 +18,8 @@ class BookController(@Autowired private val bookService: BookService) {
     }
 
     @PostMapping("/add")
-    private fun addBook(@RequestBody book: Book) {
-        bookService.addBook(book)
+    private fun addBooks(@RequestBody bookModel: BookModel) {
+        bookService.addBooks(bookModel.books)
     }
 
     @PutMapping("/{bookId}")

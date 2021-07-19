@@ -27,6 +27,12 @@ class BookService(@Autowired private val bookRepository: BookRepository) {
         bookRepository.save(book)
     }
 
+    fun addBooks(books: List<Book>) {
+        books.forEach {
+            addBook(it)
+        }
+    }
+
     @Transactional
     fun updateBook(bookId: Int, name: String?, description: String?) {
         val bookById = bookRepository.findById(bookId).orElseThrow { throw IllegalArgumentException("Book with id $bookId does not exist.") }

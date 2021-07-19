@@ -26,6 +26,10 @@ class BookCategoryService(@Autowired private val bookCategoryRepository: BookCat
         }
     }
 
+    fun addBookCategories(bookCategories: List<BookCategory>) {
+        bookCategories.forEach { addBookCategory(it) }
+    }
+
     @Transactional
     fun updateBookCategory(bookCategoryId: Int, name: String?, description: String?) {
         val bookCategoryById = bookCategoryRepository.findById(bookCategoryId).orElseThrow { throw IllegalArgumentException("Book Category with id $bookCategoryId does not exist.") }

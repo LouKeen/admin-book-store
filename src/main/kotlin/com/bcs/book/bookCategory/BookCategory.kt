@@ -4,7 +4,7 @@ import com.bcs.book.book.Book
 import javax.persistence.*
 
 @Entity
-@Table
+@Table(name = "book_category")
 data class BookCategory(
     @Id
     @SequenceGenerator(
