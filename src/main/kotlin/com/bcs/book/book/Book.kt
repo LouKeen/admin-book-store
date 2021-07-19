@@ -19,6 +19,10 @@ data class Book(
     val id: Int?,
     val name: String,
     val description: String,
+
+    @ManyToMany(targetEntity = BookCategory::class)
+    val categories: List<BookCategory>?
 ) {
-    constructor(name: String, description: String) : this(null, name, description)
+    constructor(name: String, description: String) : this(null, name, description, emptyList())
+    constructor(name: String, description: String,categories: List<BookCategory>) : this(null, name, description, categories)
 }
