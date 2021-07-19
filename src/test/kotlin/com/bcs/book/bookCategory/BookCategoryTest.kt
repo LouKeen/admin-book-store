@@ -1,7 +1,6 @@
 package com.bcs.book.bookCategory
 
-import com.bcs.book.book.Book
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class BookCategoryTest {
@@ -21,10 +20,5 @@ internal class BookCategoryTest {
     @Test
     fun getDescription() {
         assertEquals("desc", bookCategory.description)
-    }
-
-    @Test
-    fun getBooks() {
-        assertEquals(emptyList<Book>(), bookCategory.books)
     }
 }
